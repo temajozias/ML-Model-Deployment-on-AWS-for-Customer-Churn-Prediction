@@ -1,0 +1,6 @@
+[2025-09-19 12:51:33,286] 127.0.0.1 requested http://127.0.0.1:5000/churn-prediction ERROR {flask_app_logger Thread-2} : Error in churn_prediction: name 'psycopg2' is not defined
+[2025-09-19 12:51:53,346] 127.0.0.1 requested http://127.0.0.1:5000/churn-prediction ERROR {flask_app_logger Thread-3} : Error in churn_prediction: name 'psycopg2' is not defined
+[2025-09-19 12:52:23,081] 127.0.0.1 requested http://127.0.0.1:5000/churn-prediction ERROR {flask_app_logger Thread-4} : Error in churn_prediction: name 'psycopg2' is not defined
+[2025-09-19 12:52:42,200] 127.0.0.1 requested http://127.0.0.1:5000/churn-prediction ERROR {flask_app_logger Thread-5} : Error in churn_prediction: name 'psycopg2' is not defined
+[2025-09-19 12:53:34,984] 127.0.0.1 requested http://127.0.0.1:5000/churn-prediction ERROR {flask_app_logger Thread-2} : Error in churn_prediction: name 'psycopg2' is not defined
+[2025-09-19 13:13:25,279] 127.0.0.1 requested http://127.0.0.1:5000/churn-prediction ERROR {flask_app_logger Thread-2} : Error in churn_prediction: Length of values (1) does not match length of index (5)

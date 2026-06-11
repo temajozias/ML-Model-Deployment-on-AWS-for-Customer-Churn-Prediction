@@ -1,0 +1,84 @@
+# Initialize Terraform
+terraform init
+
+
+# Generate and show execution plan
+terraform plan
+
+
+# Apply the Terraform configuration
+terraform apply
+
+
+# Validate the Terraform configuration
+terraform validate
+
+
+# Generate execution plan with variables file and auto-approve
+terraform plan -var-file="secrets.tfvars" -auto-approve
+
+
+
+# Apply configuration with variables file and auto-approve
+terraform apply -var-file="secrets.tfvars" -auto-approve
+
+
+
+#Preview Changes
+
+terraform plan -target="aws_db_instance.postgres_instance" -var-file="secrets.tfvars"
+
+# Terraform to create the RDS Postgres DB Instance
+terraform apply -target="aws_db_instance.postgres_instance" -var-file="secrets.tfvars" -auto-approve
+
+
+
+# Apply only the ECR repository
+terraform apply -target=aws_ecr_repository.churn_repo -var-file="secrets.tfvars" -auto-approve
+
+
+
+# Apply only the CodeBuild project
+terraform apply -target=aws_codebuild_project.topic_codebuild -var-file="secrets.tfvars" -auto-approve
+
+
+
+
+# List all resources in Terraform state
+terraform state list
+
+
+
+
+# Show Terraform state details
+terraform show
+
+
+
+# Apply only Load Balancer resources
+terraform apply -target=aws_lb_target_group.churn_target_group -target=aws_lb.churn_load_balancer -target=aws_lb_listener.churn_connection -auto-approve
+
+
+
+# Apply only the ECS cluster
+terraform apply -target=aws_ecs_cluster.churn_cluster -auto-approve
+
+
+
+# Apply only CloudWatch Log Group
+terraform apply -target=aws_cloudwatch_log_group.churn_app -auto-approve
+
+
+
+# Apply only ECS task definition
+terraform apply -target=aws_ecs_task_definition.churn_definition -auto-approve
+
+
+
+# Apply only ECS service
+terraform apply -target=aws_ecs_service.churn_service -auto-approve
+
+
+
+# Final: Apply CodePipeline
+terraform apply -target=aws_codepipeline.churn_pipeline -var-file="secrets.tfvars" -auto-approve

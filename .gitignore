@@ -1,0 +1,36 @@
+# Ignore Terraform folders
+TerraformApplication/
+Terraform Resources/
+Terraform Resources - Original with tags to replace/
+
+# Terraform directories and state
+TerraformApplication/.aws
+TerraformApplication/.terraform
+TerraformApplication/terraform.tfstate
+TerraformApplication/terraform.tfstate.backup
+TerraformApplication/.terraform.lock.hcl
+
+Terraform Resources/.aws
+
+# Python caches
+__pycache__/
+**/__pycache__/
+*.py[cod]
+
+# VSCode
+.vscode/
+
+# Flask logs and caches
+FlaskApplication/__pycache__/
+FlaskApplication/logs/
+FlaskApplication/**/*.ipynb
+
+# Flask virtual environment
+FlaskApplication/.venv/
+
+# Env files (credentials only, not entire src/)
+
+.env
+.env.*
+FlaskApplication/src/.env
+FlaskApplication/src/.env.*

@@ -1,0 +1,69 @@
+{
+	"data": [
+		{
+			"Surname": "Hargrave",
+			"CreditScore": 619,
+			"Geography": "France",
+			"Gender": "Female",
+			"Age": 42,
+			"Tenure": 2,
+			"Balance": 0,
+			"NumOfProducts": 1,
+			"HasCrCard": 1,
+			"IsActiveMember": 1,
+			"EstimatedSalary": 101348.88
+		},
+		{
+			"Surname": "Hill",
+			"CreditScore": 608,
+			"Geography": "Spain",
+			"Gender": "Female",
+			"Age": 41,
+			"Tenure": 1,
+			"Balance": 83807.86,
+			"NumOfProducts": 1,
+			"HasCrCard": 0,
+			"IsActiveMember": 1,
+			"EstimatedSalary": 112542.58
+		},
+		{
+			"Surname": "Onio",
+			"CreditScore": 502,
+			"Geography": "France",
+			"Gender": "Female",
+			"Age": 42,
+			"Tenure": 8,
+			"Balance": 159660.8,
+			"NumOfProducts": 3,
+			"HasCrCard": 1,
+			"IsActiveMember": 0,
+			"EstimatedSalary": 113931.57
+		},
+		{
+			"Surname": "Boni",
+			"CreditScore": 699,
+			"Geography": "France",
+			"Gender": "Female",
+			"Age": 39,
+			"Tenure": 1,
+			"Balance": 0,
+			"NumOfProducts": 2,
+			"HasCrCard": 0,
+			"IsActiveMember": 0,
+			"EstimatedSalary": 93826.63
+		},
+		{
+			"Surname": "Mitchell",
+			"CreditScore": 850,
+			"Geography": "Spain",
+			"Gender": "Female",
+			"Age": 43,
+			"Tenure": 2,
+			"Balance": 125510.82,
+			"NumOfProducts": 1,
+			"HasCrCard": 1,
+			"IsActiveMember": 1,
+			"EstimatedSalary": 79084.1
+		}
+	]
+}
