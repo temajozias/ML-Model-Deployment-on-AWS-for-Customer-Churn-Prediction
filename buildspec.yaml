@@ -17,6 +17,14 @@ phases:
       - docker tag $IMAGE_REPO_NAME:$DATE_TAG $IMAGE_URI:$DATE_TAG
       - docker tag $IMAGE_REPO_NAME:$IMAGE_TAG $IMAGE_URI:$IMAGE_TAG
 
+  # post_build:
+  #   commands:
+  #     - echo Build completed on `date`
+  #     - echo Pushing the Docker image...
+  #     - docker push $IMAGE_URI:$IMAGE_TAG
+  #     - docker push $IMAGE_URI:$DATE_TAG
+  #     - echo Build Successful
+  #     - printf '[{"name":"churn-application-container","imageUri":"%s"}]' $IMAGE_URI:$IMAGE_TAG > imagedefinitions.json
   post_build:
     commands:
       - echo Build completed on `date`
@@ -25,7 +33,14 @@ phases:
       - docker push $IMAGE_URI:$DATE_TAG
       - echo Build Successful
       - printf '[{"name":"churn-application-container","imageUri":"%s"}]' $IMAGE_URI:$IMAGE_TAG > imagedefinitions.json
+      - cat imagedefinitions.json  # verify file was created
+
+# artifacts:
+#   files:
+#     - imagedefinitions.json
 
 artifacts:
   files:
     - imagedefinitions.json
+  base-directory: .
+  discard-paths: yes

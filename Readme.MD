@@ -390,6 +390,8 @@ terraform apply -target=aws_ecr_repository.churn_repo -var-file="secrets.tfvars"
 10b) Create the CodeBuild Project
 terraform apply -target=aws_codebuild_project.topic_codebuild -var-file="secrets.tfvars" -auto-approve
 
+This command will attach the policies to the role
+terraform apply -target=aws_iam_role_policy_attachment.ecr_access -target=aws_iam_role_policy_attachment.secrets_manager_access -target=aws_iam_role_policy_attachment.cloudwatch_logs_full_access -target=aws_iam_role_policy_attachment.codebuild_basic_policy -target=aws_iam_role_policy.codebuild_s3_full_access -var-file="secrets.tfvars" -auto-approve
 
 * Note: After Terraform creates the CodeBuild project, verify the service role in the AWS console.
 
@@ -429,6 +431,20 @@ terraform apply -target=aws_ecs_task_definition.churn_definition -auto-approve
 
 10g) Create ECS Service
 terraform apply -target=aws_ecs_service.churn_service -auto-approve
+
+    Authorize the codestart connection manually using aws console
+    Go to:
+
+    1. AWS Console → search for CodePipeline in the search bar
+
+    2. On the left sidebar → Settings → Connections
+
+    3. You should see github-connection with status Pending
+
+    Or go directly to:
+
+    AWS Console → search Developer Tools → Settings → Connections
+
 
 
 10h) Final Step: Create CodePipeline
