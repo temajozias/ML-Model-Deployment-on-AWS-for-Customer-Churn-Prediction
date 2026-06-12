@@ -1,4 +1,5 @@
-FROM python:3.8
+# FROM python:3.8
+FROM public.ecr.aws/docker/library/python:3.8
 COPY FlaskApplication/requirements.txt .
 RUN pip install -r requirements.txt
 WORKDIR /churn_prediction
