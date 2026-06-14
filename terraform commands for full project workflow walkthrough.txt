@@ -61,11 +61,13 @@ terraform apply -target=aws_ecs_task_definition.churn_definition -auto-approve
 terraform apply -target=aws_ecs_service.churn_service -auto-approve
 
 # confirm codestar connection in the console after this command
+# Update the command and install the AWS Connector for GitHub app on the repository
+# and connect  
 terraform apply -target=aws_codestarconnections_connection.github -auto-approve
 
 
 # Then set the pipeline
-terraform apply -target=aws_codepipeline.churn_pipeline -target=aws_cloudwatch_event_rule.codepipeline_trigger -target=aws_cloudwatch_event_target.codepipeline_target -var-file="secrets.tfvars" -auto-approve
+terraform apply -target=aws_codepipeline.churn_pipeline -var-file="secrets.tfvars" -auto-approve
 
 
 # Copy the churn app url and test
