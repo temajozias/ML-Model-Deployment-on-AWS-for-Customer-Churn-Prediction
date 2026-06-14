@@ -1,0 +1,90 @@
+# make sure you are in the parent project folder and open a command prompt
+
+cd "Terraform Resources"
+
+
+terraform apply -target=aws_vpc.main -target=aws_internet_gateway.main -target=aws_subnet.public_1 -target=aws_subnet.public_2 -target=aws_subnet.private_1 -target=aws_subnet.private_2 -target=aws_route_table.public -target=aws_route_table_association.public_1 -target=aws_route_table_association.public_2 -target=aws_security_group.main -auto-approve
+
+
+terraform apply -target=aws_db_instance.postgres_instance -var-file="secrets.tfvars" -auto-approve
+
+
+
+cd .. 
+# Load Data into the RDS Database Instance
+
+cd FlaskApplication
+
+# activate virtual environment
+.venv\Scripts\activate
+
+# Move to the source folder
+cd src
+
+# If you use private network you must launch a small EC2 instance (in the same VPC/public subnet), copying your script there, and running it from there.
+python RDS_Data_load.py
+
+cd ../ 
+
+# deactivate the virtual environment
+deactivate
+
+# Go back to parent project
+cd ..
+
+# Go to terraform ressouces folder
+cd "Terraform Resources"
+
+
+terraform apply -target=aws_ecr_repository.churn_repo -var-file="secrets.tfvars" -auto-approve
+
+
+
+terraform apply -target=aws_codebuild_project.topic_codebuild -var-file="secrets.tfvars" -auto-approve
+
+
+terraform apply -target=aws_iam_role_policy_attachment.ecr_access -target=aws_iam_role_policy_attachment.secrets_manager_access -target=aws_iam_role_policy_attachment.cloudwatch_logs_full_access -target=aws_iam_role_policy_attachment.codebuild_basic_policy -target=aws_iam_role_policy.codebuild_s3_full_access -var-file="secrets.tfvars" -auto-approve
+
+
+terraform apply -target=aws_lb_target_group.churn_target_group -target=aws_lb.churn_load_balancer -target=aws_lb_listener.churn_connection -auto-approve
+
+
+terraform apply -target=aws_ecs_cluster.churn_cluster -auto-approve
+
+
+terraform apply -target=aws_cloudwatch_log_group.churn_app -auto-approve
+
+
+terraform apply -target=aws_ecs_task_definition.churn_definition -auto-approve
+
+
+terraform apply -target=aws_ecs_service.churn_service -auto-approve
+
+# confirm codestar connection in the console after this command
+terraform apply -target=aws_codestarconnections_connection.github -auto-approve
+
+
+# Then set the pipeline
+terraform apply -target=aws_codepipeline.churn_pipeline -var-file="secrets.tfvars" -auto-approve
+
+
+
+# Copy the churn app url and test
+
+curl -X GET http://churn-load-balancer-210275667.us-east-1.elb.amazonaws.com/health-status
+
+curl -X POST http://churn-load-balancer-210275667.us-east-1.elb.amazonaws.com/churn-prediction 
+
+
+
+# After testing destroy the architecture
+terraform destroy -auto-approve
+
+
+
+# If during destroying you pc unexpectedly shuts down, open a command prompt in the terraform folder 
+# Refresh the terraform state
+terraform apply -refresh-only -auto-approve
+
+# Then destroy everything
+terraform destroy -auto-approve

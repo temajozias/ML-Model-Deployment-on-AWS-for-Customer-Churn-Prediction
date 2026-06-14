@@ -122,6 +122,9 @@ pip install -r requirements.txt
 
 After this, your environment will be ready to run the Flask application and interact with the ML backend.
 
+Step 1 - provision VPC, subnets, route tables, internet gateway, and security group
+terraform apply -target=aws_vpc.main -target=aws_internet_gateway.main -target=aws_subnet.public_1 -target=aws_subnet.public_2 -target=aws_subnet.private_1 -target=aws_subnet.private_2 -target=aws_route_table.public -target=aws_route_table_association.public_1 -target=aws_route_table_association.public_2 -target=aws_security_group.main -auto-approve
+
 
 4) Create the RDS Database Instance
 
@@ -416,6 +419,9 @@ terraform apply \
   -target=aws_lb_listener.churn_connection \
   -auto-approve
 
+or
+
+terraform apply -target=aws_lb_target_group.churn_target_group -target=aws_lb.churn_load_balancer -target=aws_lb_listener.churn_connection -auto-approve
 
 10d) Create the ECS Cluster
 terraform apply -target=aws_ecs_cluster.churn_cluster -auto-approve
@@ -431,6 +437,10 @@ terraform apply -target=aws_ecs_task_definition.churn_definition -auto-approve
 
 10g) Create ECS Service
 terraform apply -target=aws_ecs_service.churn_service -auto-approve
+
+
+Authorize Codestar connection
+terraform apply -target=aws_codestarconnections_connection.github -auto-approve
 
     Authorize the codestart connection manually using aws console
     Go to:
@@ -472,7 +482,7 @@ Copy the DNS name of the load balancer.
 
 Use curl or your browser to verify the application is running:
 
-curl -X GET http://<load-balancer-dns>/health-status
+curl -X GET http://[load-balancer-dns]/health-status
 
 
 A successful response (e.g., status: alive) confirms that the ECS containers are healthy and accessible.
@@ -482,7 +492,7 @@ A successful response (e.g., status: alive) confirms that the ECS containers are
 
 Send a POST request to the churn prediction endpoint:
 
-curl -X POST http://<load-balancer-dns>/churn-prediction
+curl -X POST http://[load-balancer-dns]/churn-prediction
 
 
 * What happens:
