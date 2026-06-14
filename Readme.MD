@@ -459,6 +459,7 @@ terraform apply -target=aws_codestarconnections_connection.github -auto-approve
 
 
 10h) Final Step: Create CodePipeline
+
 terraform apply -target=aws_codepipeline.churn_pipeline -target=aws_cloudwatch_event_rule.codepipeline_trigger -target=aws_cloudwatch_event_target.codepipeline_target -var-file="secrets.tfvars" -auto-approve
 
 
